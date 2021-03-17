@@ -1,0 +1,25 @@
+version: '3'
+
+networks:
+  indoor_people_count:
+    driver: bridge
+
+volumes:
+  indoor_people_count_db:
+    driver: local
+
+services:
+  indoor_people_count_db:
+    image: postgres:13-alpine
+    container_name: indoor_people_count_db_1
+    restart: always
+    volumes:
+      - indoor_people_count_db:/var/lib/postgresql/data
+    ports:
+      - 5431:5432
+    environment:
+      POSTGRES_DB: indoor_people_count
+      POSTGRES_USER: indoor_people_count_user
+      POSTGRES_PASSWORD: indoor_people_count_password
+    networks:
+      - indoor_people_count
