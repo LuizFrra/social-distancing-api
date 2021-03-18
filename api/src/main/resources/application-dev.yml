@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5431/social_distancing
+    username: social_distancing_user
+    password: social_distancing_password
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        type: trace

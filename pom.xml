@@ -21,7 +21,6 @@
         <module>gateway</module>
         <module>domain</module>
         <module>infrastructure</module>
-        <module>flyway</module>
     </modules>
 
     <properties>
