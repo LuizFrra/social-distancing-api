@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: indoor_people_count_api
+
+#logging:
+#  level:
+#    root: debug

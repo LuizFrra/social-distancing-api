@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5431/indoor_people_count
+    username: indoor_people_count_user
+    password: indoor_people_count_password
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        type: trace
