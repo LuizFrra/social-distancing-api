@@ -2,6 +2,8 @@ package com.luiz.domain.entities.device;
 
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class DeviceServiceImpl implements DeviceService {
 
@@ -19,6 +21,15 @@ public class DeviceServiceImpl implements DeviceService {
             return true;
         }
 
+        return false;
+    }
+
+    @Override
+    public boolean createDeviceKey(Device device) {
+        if(device.getKey() == null || device.getKey().isEmpty() || device.getKey().isBlank()) {
+            device.setKey(UUID.randomUUID().toString().replace("-", ""));
+            return true;
+        }
         return false;
     }
 }
