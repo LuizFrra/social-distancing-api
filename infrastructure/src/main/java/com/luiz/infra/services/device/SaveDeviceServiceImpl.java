@@ -3,6 +3,7 @@ package com.luiz.infra.services.device;
 import com.luiz.domain.entities.device.Device;
 import com.luiz.domain.entities.device.DeviceStatus;
 import com.luiz.infra.repositories.DeviceRepository;
+import com.luiz.domain.infrastructure.services.device.SaveDeviceService;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
