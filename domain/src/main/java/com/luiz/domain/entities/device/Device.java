@@ -7,6 +7,7 @@ import javax.persistence.*;
 public class Device {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     /**
