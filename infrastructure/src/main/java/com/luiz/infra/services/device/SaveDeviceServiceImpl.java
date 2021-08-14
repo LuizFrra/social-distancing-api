@@ -11,7 +11,11 @@ import java.util.Optional;
 @Service
 public class SaveDeviceServiceImpl implements SaveDeviceService {
 
-    private DeviceRepository deviceRepository;
+    private final DeviceRepository deviceRepository;
+
+    public SaveDeviceServiceImpl(DeviceRepository deviceRepository) {
+        this.deviceRepository = deviceRepository;
+    }
 
     @Override
     public Optional<Device> call(Device device) {
