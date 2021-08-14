@@ -29,7 +29,7 @@ public class SaveDeviceServiceImpl implements SaveDeviceService {
         Optional<Device> deviceFromDb = deviceRepository.findByIdentifier(device.getIdentifier());
 
         if(deviceFromDb.isPresent())
-            throw new DataAlreadyExistException("already exist a device with same identifier");
+            throw new DataAlreadyExistException("device.identifier.ex");
 
         return Optional.of(deviceRepository.save(device));
     }

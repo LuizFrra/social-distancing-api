@@ -3,12 +3,11 @@ package com.luiz.api.exception;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.luiz.domain.exceptions.AbstractGeneralException;
-import org.springframework.web.servlet.support.RequestContext;
+import org.springframework.context.MessageSource;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.util.Date;
-import java.util.stream.Collectors;
+import java.util.Locale;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ErrorInfoDTO {
@@ -34,10 +33,10 @@ public class ErrorInfoDTO {
         this.statusCode = statusCode;
     }
 
-    private ErrorInfoDTO(HttpServletRequest req, Exception ex) {
+    private ErrorInfoDTO(HttpServletRequest req, Exception ex, MessageSource messageSource, Locale locale) {
         this.path = req.getRequestURI();
         this.httpMethod = req.getMethod();
-        this.message = ex.getMessage();
+        this.message = messageSource.getMessage(ex.getMessage(), null, locale);
         this.timeStamp = new Date().getTime();
     }
     public void setObject(Object request) {
@@ -48,8 +47,8 @@ public class ErrorInfoDTO {
         this.statusCode = statusCode;
     }
 
-    public static ErrorInfoDTO create(HttpServletRequest req, Exception ex) {
-        ErrorInfoDTO errorInfo = new ErrorInfoDTO(req, ex);
+    public static ErrorInfoDTO create(HttpServletRequest req, Exception ex, MessageSource messageSource, Locale locale) {
+        ErrorInfoDTO errorInfo = new ErrorInfoDTO(req, ex, messageSource, locale);
         if (ex instanceof AbstractGeneralException) {
             errorInfo.setStatusCode(((AbstractGeneralException) ex).httpStatus);
         }

@@ -1,7 +1,10 @@
 package com.luiz.domain.entities.device.dto;
 
+import javax.validation.constraints.NotNull;
+
 public class CreateDeviceDTO {
 
+    @NotNull
     public String identifier;
 
     public CreateDeviceDTO() {
