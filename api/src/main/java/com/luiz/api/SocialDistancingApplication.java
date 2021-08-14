@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication(scanBasePackages = "com.luiz")
-public class TccApplication {
+public class SocialDistancingApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TccApplication.class, args);
+		SpringApplication.run(SocialDistancingApplication.class, args);
 	}
 
 }
