@@ -11,7 +11,7 @@ public class DeviceServiceImpl implements DeviceService {
     public boolean changeDeviceStatus(Device device, DeviceStatus status) {
         DeviceStatus currStatus = device.getStatus();
 
-        if (currStatus.equals(DeviceStatus.BLOCKED) || device.getStatus().equals(status)) {
+        if (currStatus != null && (currStatus.equals(DeviceStatus.BLOCKED) || device.getStatus().equals(status))) {
             return false;
         }
 
@@ -22,7 +22,8 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Override
     public boolean createDeviceKey(Device device) {
-        if (device.getKey() == null || device.getKey().isEmpty() || device.getKey().isBlank()) {
+        String currentDeviceKey = device.getKey();
+        if (currentDeviceKey == null || currentDeviceKey.trim().isEmpty()) {
             device.setKey(UUID.randomUUID().toString().replace("-", ""));
             return true;
         }
