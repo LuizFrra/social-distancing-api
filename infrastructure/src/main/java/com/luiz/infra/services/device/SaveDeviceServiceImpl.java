@@ -2,6 +2,7 @@ package com.luiz.infra.services.device;
 
 import com.luiz.domain.entities.device.Device;
 import com.luiz.domain.entities.device.DeviceStatus;
+import com.luiz.domain.exceptions.DataAlreadyExistException;
 import com.luiz.infra.repositories.DeviceRepository;
 import com.luiz.domain.infrastructure.services.device.SaveDeviceService;
 import org.springframework.stereotype.Service;
@@ -27,10 +28,9 @@ public class SaveDeviceServiceImpl implements SaveDeviceService {
 
         Optional<Device> deviceFromDb = deviceRepository.findByIdentifier(device.getIdentifier());
 
-        if (deviceFromDb.isEmpty()) {
-            return Optional.of(deviceRepository.save(device));
-        }
+        if(deviceFromDb.isPresent())
+            throw new DataAlreadyExistException("already exist a device with same identifier");
 
-        return Optional.empty();
+        return Optional.of(deviceRepository.save(device));
     }
 }
