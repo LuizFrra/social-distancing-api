@@ -1,4 +1,4 @@
-package com.luiz.infra.integration.common;
+package com.luiz.infra.integration;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
