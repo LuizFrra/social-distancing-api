@@ -1,4 +1,4 @@
-package com.luiz.main.unit.service.DeviceService;
+package com.luiz.domain.unit.service.DeviceService;
 
 import com.luiz.domain.entities.device.Device;
 import com.luiz.domain.entities.device.DeviceService;
