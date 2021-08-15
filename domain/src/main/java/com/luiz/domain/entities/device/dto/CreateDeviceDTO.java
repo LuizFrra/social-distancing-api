@@ -4,7 +4,7 @@ import javax.validation.constraints.NotNull;
 
 public class CreateDeviceDTO {
 
-    @NotNull
+    @NotNull(message = "device.identifier.notnull.validation")
     public String identifier;
 
     public CreateDeviceDTO() {
