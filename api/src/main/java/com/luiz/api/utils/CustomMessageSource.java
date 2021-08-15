@@ -1,20 +1,14 @@
 package com.luiz.api.utils;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.util.Locale;
 
 @Component
 public class CustomMessageSource {
     private static MessageSource messageSource;
-
-    private final MessageSource ms;
-
-    public CustomMessageSource(MessageSource messageSource) {
-        this.ms = messageSource;
-    }
 
     public static String getMessage(String key, Locale locale) {
         try {
@@ -24,9 +18,13 @@ public class CustomMessageSource {
         }
     }
 
-    @PostConstruct
-    private void setupStatic() {
-        CustomMessageSource.messageSource = ms;
+    @Autowired
+    public void setMessageSource(MessageSource messageSource) {
+        CustomMessageSource.setStaticMessageSource(messageSource);
+    }
+
+    private static void setStaticMessageSource(MessageSource messageSource) {
+        CustomMessageSource.messageSource = messageSource;
     }
 
 }

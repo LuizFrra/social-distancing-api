@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.luiz.api.utils.CustomMessageSource;
 import com.luiz.domain.exceptions.AbstractGeneralException;
-import org.springframework.context.MessageSource;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -12,40 +11,24 @@ import java.util.Locale;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ErrorInfoDTO {
-    public final String path;
+    private final String path;
 
-    public final String message;
+    private final String message;
 
-    public final long timeStamp;
+    private final long timeStamp;
 
-    public final String httpMethod;
+    private final String httpMethod;
 
     @JsonIgnore
-    public int statusCode;
+    private int statusCode;
 
-    public Object body;
-
-    private ErrorInfoDTO(String path, String message, long timeStamp, String httpMethod, Object request, int statusCode) {
-        this.path = path;
-        this.message = message;
-        this.timeStamp = timeStamp;
-        this.httpMethod = httpMethod;
-        this.body = request;
-        this.statusCode = statusCode;
-    }
+    private Object body;
 
     private ErrorInfoDTO(HttpServletRequest req, Exception ex, Locale locale) {
         this.path = req.getRequestURI();
         this.httpMethod = req.getMethod();
         this.message = CustomMessageSource.getMessage(ex.getMessage(), locale);
         this.timeStamp = new Date().getTime();
-    }
-    public void setObject(Object request) {
-        this.body = request;
-    }
-
-    public void setStatusCode(int statusCode) {
-        this.statusCode = statusCode;
     }
 
     public static ErrorInfoDTO create(HttpServletRequest req, Exception ex, Locale locale) {
@@ -55,5 +38,37 @@ public class ErrorInfoDTO {
         }
 
         return errorInfo;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public long getTimeStamp() {
+        return timeStamp;
+    }
+
+    public String getHttpMethod() {
+        return httpMethod;
+    }
+
+    public int getStatusCode() {
+        return statusCode;
+    }
+
+    public void setStatusCode(int statusCode) {
+        this.statusCode = statusCode;
+    }
+
+    public Object getBody() {
+        return body;
+    }
+
+    public void setBody(Object body) {
+        this.body = body;
     }
 }

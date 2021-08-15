@@ -4,22 +4,22 @@ import com.luiz.domain.entities.device.DeviceStatus;
 
 public class DeviceDTO {
 
-    public Long id;
+    private Long id;
 
     /**
      * A unique device identifier like a MAC Address
      */
-    public String identifier;
+    private String identifier;
 
     /**
      * A data to identifier the current status of device
      */
-    public DeviceStatus status;
+    private DeviceStatus status;
 
     public DeviceDTO() {
     }
 
-    public DeviceDTO(Long id, String identifier, DeviceStatus status, String key) {
+    public DeviceDTO(Long id, String identifier, DeviceStatus status) {
         this.id = id;
         this.identifier = identifier;
         this.status = status;

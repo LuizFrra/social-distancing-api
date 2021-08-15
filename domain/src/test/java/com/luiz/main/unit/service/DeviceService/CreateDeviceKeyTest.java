@@ -16,13 +16,13 @@ import java.util.UUID;
 @Import(
         DeviceServiceImpl.class
 )
-public class CreateDeviceKeyTest {
+class CreateDeviceKeyTest {
 
     @Autowired
     DeviceService deviceService;
 
     @Test
-    public void should_setup_an_key_if_device_havent_one() {
+    void should_setup_an_key_if_device_havent_one() {
         Device device = new Device();
         Assertions.assertTrue(deviceService.createDeviceKey(device));
         Assertions.assertNotNull(device.getKey());
@@ -30,7 +30,7 @@ public class CreateDeviceKeyTest {
     }
 
     @Test
-    public void should_return_false_if_device_already_have_an_key() {
+    void should_return_false_if_device_already_have_an_key() {
         Device device = new Device();
         String key = UUID.randomUUID().toString().replace("-", "");
         device.setKey(key);

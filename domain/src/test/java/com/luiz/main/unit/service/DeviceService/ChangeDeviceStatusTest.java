@@ -15,13 +15,13 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @Import(
         DeviceServiceImpl.class
 )
-public class ChangeDeviceStatusTest {
+class ChangeDeviceStatusTest {
 
     @Autowired
     private DeviceService deviceService;
 
     @Test
-    public void should_return_false_when_try_change_status_from_blocked_to_online() {
+    void should_return_false_when_try_change_status_from_blocked_to_online() {
         Device device = new Device(0L, "123", DeviceStatus.BLOCKED, "123");
 
         boolean result = deviceService.changeDeviceStatus(device, DeviceStatus.ONLINE);
@@ -30,7 +30,7 @@ public class ChangeDeviceStatusTest {
     }
 
     @Test
-    public void should_return_false_when_try_change_status_from_blocked_to_offline() {
+    void should_return_false_when_try_change_status_from_blocked_to_offline() {
         Device device = new Device(0L, "123", DeviceStatus.BLOCKED, "123");
 
         boolean result = deviceService.changeDeviceStatus(device, DeviceStatus.OFFLINE);
@@ -39,7 +39,7 @@ public class ChangeDeviceStatusTest {
     }
 
     @Test
-    public void should_return_true_when_try_change_status_from_online_to_offline() {
+    void should_return_true_when_try_change_status_from_online_to_offline() {
         Device device = new Device(0L, "123", DeviceStatus.ONLINE, "123");
 
         boolean result = deviceService.changeDeviceStatus(device, DeviceStatus.OFFLINE);
@@ -48,7 +48,7 @@ public class ChangeDeviceStatusTest {
     }
 
     @Test
-    public void should_return_true_when_try_change_status_from_online_to_blocked() {
+    void should_return_true_when_try_change_status_from_online_to_blocked() {
         Device device = new Device(0L, "123", DeviceStatus.ONLINE, "123");
 
         boolean result = deviceService.changeDeviceStatus(device, DeviceStatus.BLOCKED);
@@ -57,7 +57,7 @@ public class ChangeDeviceStatusTest {
     }
 
     @Test
-    public void should_return_true_when_try_change_status_from_offline_to_online() {
+    void should_return_true_when_try_change_status_from_offline_to_online() {
         Device device = new Device(0L, "123", DeviceStatus.OFFLINE, "123");
 
         boolean result = deviceService.changeDeviceStatus(device, DeviceStatus.ONLINE);
@@ -66,7 +66,7 @@ public class ChangeDeviceStatusTest {
     }
 
     @Test
-    public void should_return_true_when_try_change_status_from_offline_to_blocked() {
+    void should_return_true_when_try_change_status_from_offline_to_blocked() {
         Device device = new Device(0L, "123", DeviceStatus.OFFLINE, "123");
 
         boolean result = deviceService.changeDeviceStatus(device, DeviceStatus.BLOCKED);
@@ -75,7 +75,7 @@ public class ChangeDeviceStatusTest {
     }
 
     @Test
-    public void should_return_false_when_try_change_status_from_offline_to_offline() {
+    void should_return_false_when_try_change_status_from_offline_to_offline() {
         Device device = new Device(0L, "123", DeviceStatus.OFFLINE, "123");
 
         boolean result = deviceService.changeDeviceStatus(device, DeviceStatus.OFFLINE);
@@ -84,7 +84,7 @@ public class ChangeDeviceStatusTest {
     }
 
     @Test
-    public void should_return_false_when_try_change_status_from_online_to_online() {
+    void should_return_false_when_try_change_status_from_online_to_online() {
         Device device = new Device(0L, "123", DeviceStatus.ONLINE, "123");
 
         boolean result = deviceService.changeDeviceStatus(device, DeviceStatus.ONLINE);
