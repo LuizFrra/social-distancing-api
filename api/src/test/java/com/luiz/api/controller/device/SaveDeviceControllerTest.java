@@ -37,7 +37,7 @@ class SaveDeviceControllerTest extends BaseControllerTest {
 
     @Test
     void shouldNotCreateDeviceIfDeviceIdentifierIsEmptyPTBR() {
-        validateDeviceCreationErrorMessage("", "", "O campo identifier e obrigatorio");
+        validateDeviceCreationErrorMessage("", "pt-BR", "O campo identifier e obrigatorio");
     }
 
     @Test
@@ -47,7 +47,7 @@ class SaveDeviceControllerTest extends BaseControllerTest {
 
     @Test
     void shouldNotCreateDeviceIfDeviceIdentifierIsNullPTBR() {
-        validateDeviceCreationErrorMessage(null, "", "O campo identifier e obrigatorio");
+        validateDeviceCreationErrorMessage(null, "pt-BR", "O campo identifier e obrigatorio");
     }
 
     @Test
@@ -57,7 +57,7 @@ class SaveDeviceControllerTest extends BaseControllerTest {
 
     @Test
     void shouldNotCreateDeviceIfDeviceIdentifierIsBlankPTBR() {
-        validateDeviceCreationErrorMessage(" ", "", "O campo identifier e obrigatorio");
+        validateDeviceCreationErrorMessage(" ", "pt-BR", "O campo identifier e obrigatorio");
     }
 
     @Test
@@ -67,7 +67,7 @@ class SaveDeviceControllerTest extends BaseControllerTest {
 
     @Test
     void shouldNotCreateDeviceIfDeviceIdentifierIsBiggerThen20PTBR() {
-        validateDeviceCreationErrorMessage("a".repeat(21), "", "identificador do device deve estar entre 1 e 20");
+        validateDeviceCreationErrorMessage("a".repeat(21), "pt-BR", "identificador do device deve estar entre 1 e 20");
     }
 
     @Test

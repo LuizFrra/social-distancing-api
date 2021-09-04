@@ -11,14 +11,14 @@ import java.util.Locale;
 public class ApiLocaleConfig {
     @Bean
     public AcceptHeaderLocaleResolver localeResolver() {
-        final AcceptHeaderLocaleResolver resolver = new AcceptHeaderLocaleResolver();
-        resolver.setDefaultLocale(new Locale("pt", "BR"));
-        return resolver;
+        return new AcceptHeaderLocaleResolver();
     }
 
     @Bean
     public ReloadableResourceBundleMessageSource messageSource() {
         final ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+        messageSource.setDefaultLocale(new Locale("pt", "BR"));
+        messageSource.setFallbackToSystemLocale(false);
         messageSource.setBasenames("classpath:/i18n/api-lang");
         return messageSource;
     }
