@@ -9,6 +9,20 @@ volumes:
     driver: local
 
 services:
+  api:
+    build:
+      context: ./
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      DATASOURCE_PORT: 5432
+      DATASOURCE_HOST: social_distancing_db
+    ports:
+      - 80:8080
+    networks:
+      - social_distancing
+    depends_on:
+      - social_distancing_db
+
   social_distancing_db:
     image: postgres:13-alpine
     container_name: social_distancing_db_1
