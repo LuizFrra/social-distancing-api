@@ -31,7 +31,7 @@ class SaveDeviceControllerTest extends BaseControllerTest {
                 .body(
                         "$", hasKey("id"),
                         "identifier", equalTo(identifier),
-                        "status", equalTo(DeviceStatus.BLOCKED.toString())
+                        "status", equalTo(DeviceStatus.OFFLINE.toString())
                 );
     }
 

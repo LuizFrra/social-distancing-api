@@ -25,7 +25,7 @@ public class SaveDeviceServiceImpl implements SaveDeviceService {
         if (device.getKey() == null || device.getKey().isBlank() || device.getKey().isEmpty())
             throw new FieldRequiredException("device.identifier.length");
 
-        device.setStatus(DeviceStatus.BLOCKED);
+        device.setStatus(DeviceStatus.OFFLINE);
 
         Optional<Device> deviceFromDb = deviceRepository.findByIdentifier(device.getIdentifier());
 

@@ -52,14 +52,14 @@ class SaveDeviceServiceTest extends DBContainerIntegrationTest {
     }
 
     @Test
-    void should_save_device_with_blocked_status() {
+    void should_save_device_with_offline_status() {
         Device device = new Device();
         device.setStatus(DeviceStatus.ONLINE);
         device.setIdentifier(generateIdentifier());
         deviceService.createDeviceKey(device);
         Optional<Device> savedDevice = saveDeviceService.call(device);
         Assertions.assertTrue(savedDevice.isPresent());
-        Assertions.assertEquals(DeviceStatus.BLOCKED, savedDevice.get().getStatus());
+        Assertions.assertEquals(DeviceStatus.OFFLINE, savedDevice.get().getStatus());
     }
 
     @Test
