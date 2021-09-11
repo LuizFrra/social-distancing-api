@@ -24,7 +24,7 @@ class CreateDeviceKeyTest {
     @Test
     void should_setup_an_key_if_device_havent_one() {
         Device device = new Device();
-        Assertions.assertTrue(deviceService.createDeviceKey(device));
+        Assertions.assertTrue(deviceService.setupNewDevice(device));
         Assertions.assertNotNull(device.getKey());
         Assertions.assertNotEquals("", device.getKey().trim());
     }
@@ -34,7 +34,7 @@ class CreateDeviceKeyTest {
         Device device = new Device();
         String key = UUID.randomUUID().toString().replace("-", "");
         device.setKey(key);
-        Assertions.assertFalse(deviceService.createDeviceKey(device));
+        Assertions.assertFalse(deviceService.setupNewDevice(device));
         Assertions.assertEquals(key, device.getKey());
     }
 }

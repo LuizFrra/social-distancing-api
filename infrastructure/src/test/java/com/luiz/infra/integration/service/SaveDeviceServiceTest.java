@@ -34,7 +34,7 @@ class SaveDeviceServiceTest extends DBContainerIntegrationTest {
     void should_save_device() {
         Device device = new Device();
         device.setIdentifier(generateIdentifier());
-        deviceService.createDeviceKey(device);
+        deviceService.setupNewDevice(device);
         Optional<Device> savedDevice = saveDeviceService.call(device);
         Assertions.assertTrue(savedDevice.isPresent());
         Assertions.assertNotNull(savedDevice.get().getId());
@@ -44,7 +44,7 @@ class SaveDeviceServiceTest extends DBContainerIntegrationTest {
     void should_throw_exception_if_already_exist_device_with_same_identifier() {
         Device device = new Device();
         device.setIdentifier(generateIdentifier());
-        deviceService.createDeviceKey(device);
+        deviceService.setupNewDevice(device);
         saveDeviceService.call(device);
         Assertions.assertThrows(DataAlreadyExistException.class, () -> {
            saveDeviceService.call(device);
@@ -56,7 +56,7 @@ class SaveDeviceServiceTest extends DBContainerIntegrationTest {
         Device device = new Device();
         device.setStatus(DeviceStatus.ONLINE);
         device.setIdentifier(generateIdentifier());
-        deviceService.createDeviceKey(device);
+        deviceService.setupNewDevice(device);
         Optional<Device> savedDevice = saveDeviceService.call(device);
         Assertions.assertTrue(savedDevice.isPresent());
         Assertions.assertEquals(DeviceStatus.OFFLINE, savedDevice.get().getStatus());
@@ -66,7 +66,7 @@ class SaveDeviceServiceTest extends DBContainerIntegrationTest {
     void should_not_save_device_with_identifier_greater_than_20() {
         Device device = new Device();
         device.setIdentifier(UUID.randomUUID().toString());
-        deviceService.createDeviceKey(device);
+        deviceService.setupNewDevice(device);
         Assertions.assertThrows(DataIntegrityViolationException.class, () -> {
             saveDeviceService.call(device);
         });

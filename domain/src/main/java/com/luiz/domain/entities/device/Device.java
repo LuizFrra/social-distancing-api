@@ -1,5 +1,6 @@
 package com.luiz.domain.entities.device;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -7,7 +8,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.List;
 
 @Entity
 @Table(name = "device")
@@ -36,7 +39,18 @@ public class Device {
     @Column(length = 20)
     private String key;
 
+    @OneToMany(mappedBy = "device", cascade = CascadeType.ALL)
+    private List<DeviceEnv> environmentVariables;
+
     public Device() {
+    }
+
+    public Device(Long id, String identifier, DeviceStatus status, String key, List<DeviceEnv> environmentVariables) {
+        this.id = id;
+        this.identifier = identifier;
+        this.status = status;
+        this.key = key;
+        this.environmentVariables = environmentVariables;
     }
 
     public Device(Long id, String identifier, DeviceStatus status, String key) {
@@ -76,5 +90,13 @@ public class Device {
 
     public void setKey(String key) {
         this.key = key;
+    }
+
+    public List<DeviceEnv> getEnvironmentVariables() {
+        return environmentVariables;
+    }
+
+    public void setEnvironmentVariables(List<DeviceEnv> environmentsVariables) {
+        this.environmentVariables = environmentsVariables;
     }
 }

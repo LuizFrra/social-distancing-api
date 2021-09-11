@@ -2,6 +2,8 @@ package com.luiz.domain.entities.device.dto;
 
 import com.luiz.domain.entities.device.DeviceStatus;
 
+import java.util.List;
+
 public class DeviceDTO {
 
     private Long id;
@@ -15,6 +17,8 @@ public class DeviceDTO {
      * A data to identifier the current status of device
      */
     private DeviceStatus status;
+
+    private List<DeviceEnvDTO> environmentsVariables;
 
     public DeviceDTO() {
     }
@@ -47,5 +51,13 @@ public class DeviceDTO {
 
     public void setStatus(DeviceStatus status) {
         this.status =  status;
+    }
+
+    public List<DeviceEnvDTO> getEnvironmentsVariables() {
+        return environmentsVariables;
+    }
+
+    public void setEnvironmentsVariables(List<DeviceEnvDTO> environmentsVariables) {
+        this.environmentsVariables = environmentsVariables;
     }
 }

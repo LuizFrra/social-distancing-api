@@ -1,7 +1,6 @@
 package com.luiz.infra.services.device;
 
 import com.luiz.domain.entities.device.Device;
-import com.luiz.domain.entities.device.DeviceStatus;
 import com.luiz.domain.exceptions.DataAlreadyExistException;
 import com.luiz.domain.exceptions.FieldRequiredException;
 import com.luiz.domain.infrastructure.services.device.SaveDeviceService;
@@ -24,8 +23,6 @@ public class SaveDeviceServiceImpl implements SaveDeviceService {
 
         if (device.getKey() == null || device.getKey().isBlank() || device.getKey().isEmpty())
             throw new FieldRequiredException("device.identifier.length");
-
-        device.setStatus(DeviceStatus.OFFLINE);
 
         Optional<Device> deviceFromDb = deviceRepository.findByIdentifier(device.getIdentifier());
 
