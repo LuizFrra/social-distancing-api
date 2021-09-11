@@ -7,4 +7,6 @@ public interface DeviceService {
     boolean setupNewDevice(Device device);
 
     boolean addEnvironmentVariable(Device device, DeviceEnv deviceEnv);
+
+    boolean addTag(Device device, DeviceTag deviceTag);
 }

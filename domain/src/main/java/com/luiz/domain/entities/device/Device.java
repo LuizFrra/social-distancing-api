@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -40,17 +42,28 @@ public class Device {
     private String key;
 
     @OneToMany(mappedBy = "device", cascade = CascadeType.ALL)
-    private List<DeviceEnv> environmentVariables;
+    private Collection<DeviceEnv> environmentVariables = new ArrayList<>();
+
+    @OneToMany(mappedBy = "device", cascade = CascadeType.ALL)
+    private Collection<DeviceTag> tags = new ArrayList<>();
 
     public Device() {
     }
 
-    public Device(Long id, String identifier, DeviceStatus status, String key, List<DeviceEnv> environmentVariables) {
+    public Device(
+            Long id,
+            String identifier,
+            DeviceStatus status,
+            String key,
+            List<DeviceEnv> environmentVariables,
+            List<DeviceTag> tags
+    ) {
         this.id = id;
         this.identifier = identifier;
         this.status = status;
         this.key = key;
         this.environmentVariables = environmentVariables;
+        this.tags = tags;
     }
 
     public Device(Long id, String identifier, DeviceStatus status, String key) {
@@ -92,11 +105,19 @@ public class Device {
         this.key = key;
     }
 
-    public List<DeviceEnv> getEnvironmentVariables() {
+    public Collection<DeviceEnv> getEnvironmentVariables() {
         return environmentVariables;
     }
 
-    public void setEnvironmentVariables(List<DeviceEnv> environmentsVariables) {
+    public void setEnvironmentVariables(Collection<DeviceEnv> environmentsVariables) {
         this.environmentVariables = environmentsVariables;
+    }
+
+    public Collection<DeviceTag> getTags() {
+        return tags;
+    }
+
+    public void setTags(Collection<DeviceTag> tags) {
+        this.tags = tags;
     }
 }

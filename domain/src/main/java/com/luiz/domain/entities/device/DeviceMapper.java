@@ -9,6 +9,7 @@ import org.mapstruct.factory.Mappers;
 public interface DeviceMapper {
     DeviceMapper INSTANCE = Mappers.getMapper(DeviceMapper.class);
 
+
     DeviceDTO deviceToDeviceDTO(Device device);
 
     Device createDeviceDTOToDevice(CreateDeviceDTO deviceDTO);

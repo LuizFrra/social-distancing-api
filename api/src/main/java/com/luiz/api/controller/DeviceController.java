@@ -3,6 +3,7 @@ package com.luiz.api.controller;
 import com.luiz.api.service.DeviceServiceApplication;
 import com.luiz.domain.entities.device.dto.CreateDeviceDTO;
 import com.luiz.domain.entities.device.dto.CreateDeviceEnvDTO;
+import com.luiz.domain.entities.device.dto.CreateDeviceTagDTO;
 import com.luiz.domain.entities.device.dto.DeviceDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,5 +43,13 @@ public class DeviceController {
             @PathVariable Long deviceId
     ) {
         return ResponseEntity.ok(deviceServiceApplication.addEnvironmentVariable(deviceId, createDeviceEnvDTO));
+    }
+
+    @PostMapping("/{deviceId}/tag")
+    public ResponseEntity<DeviceDTO> createDeviceTag(
+            @Valid @RequestBody CreateDeviceTagDTO createDeviceTagDTO,
+            @PathVariable Long deviceId
+    ) {
+        return ResponseEntity.ok(deviceServiceApplication.addTag(deviceId, createDeviceTagDTO));
     }
 }

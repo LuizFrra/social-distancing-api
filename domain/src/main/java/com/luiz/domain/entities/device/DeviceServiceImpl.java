@@ -54,4 +54,22 @@ public class DeviceServiceImpl implements DeviceService {
 
         return true;
     }
+
+    @Override
+    public boolean addTag(Device device, DeviceTag deviceTag) {
+        Predicate<String> isEmptyOrNull = str -> str == null || str.isEmpty() || str.isBlank();
+
+        if(isEmptyOrNull.test(deviceTag.getName()))
+            throw new FieldRequiredException("device.tag.name.notnull.validation");
+
+        device.getTags().forEach(tag -> {
+            if(tag.getName().equals(deviceTag.getName()))
+                throw new DataAlreadyExistException("device.tag.ex");
+        });
+
+        deviceTag.setDevice(device);
+        device.getTags().add(deviceTag);
+
+        return true;
+    }
 }

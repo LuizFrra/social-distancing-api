@@ -5,8 +5,11 @@ import com.luiz.domain.entities.device.DeviceEnv;
 import com.luiz.domain.entities.device.DeviceEnvMapper;
 import com.luiz.domain.entities.device.DeviceMapper;
 import com.luiz.domain.entities.device.DeviceService;
+import com.luiz.domain.entities.device.DeviceTag;
+import com.luiz.domain.entities.device.DeviceTagMapper;
 import com.luiz.domain.entities.device.dto.CreateDeviceDTO;
 import com.luiz.domain.entities.device.dto.CreateDeviceEnvDTO;
+import com.luiz.domain.entities.device.dto.CreateDeviceTagDTO;
 import com.luiz.domain.entities.device.dto.DeviceDTO;
 import com.luiz.domain.infrastructure.services.device.GetAllDevicesService;
 import com.luiz.domain.infrastructure.services.device.LoadDeviceService;
@@ -62,6 +65,14 @@ public class DeviceServiceApplication {
         Device device = loadDeviceService.call(deviceId);
         DeviceEnv deviceEnv = DeviceEnvMapper.INSTANCE.createDeviceEnvDTOToDeviceEnv(environmentDTO);
         deviceService.addEnvironmentVariable(device, deviceEnv);
+        Device updatedDevice = updateDeviceService.call(device);
+        return DeviceMapper.INSTANCE.deviceToDeviceDTO(updatedDevice);
+    }
+
+    public DeviceDTO addTag(Long deviceId, CreateDeviceTagDTO tagDTO) {
+        Device device = loadDeviceService.call(deviceId);
+        DeviceTag deviceTag = DeviceTagMapper.INSTANCE.createDeviceTagDTOToDeviceTag(tagDTO);
+        deviceService.addTag(device, deviceTag);
         Device updatedDevice = updateDeviceService.call(device);
         return DeviceMapper.INSTANCE.deviceToDeviceDTO(updatedDevice);
     }

@@ -18,7 +18,9 @@ public class DeviceDTO {
      */
     private DeviceStatus status;
 
-    private List<DeviceEnvDTO> environmentsVariables;
+    private List<DeviceEnvDTO> environmentVariables;
+
+    private List<DeviceTagDTO> tags;
 
     public DeviceDTO() {
     }
@@ -53,11 +55,19 @@ public class DeviceDTO {
         this.status =  status;
     }
 
-    public List<DeviceEnvDTO> getEnvironmentsVariables() {
-        return environmentsVariables;
+    public List<DeviceEnvDTO> getEnvironmentVariables() {
+        return environmentVariables;
     }
 
-    public void setEnvironmentsVariables(List<DeviceEnvDTO> environmentsVariables) {
-        this.environmentsVariables = environmentsVariables;
+    public void setEnvironmentVariables(List<DeviceEnvDTO> environmentVariables) {
+        this.environmentVariables = environmentVariables;
+    }
+
+    public List<DeviceTagDTO> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<DeviceTagDTO> tags) {
+        this.tags = tags;
     }
 }
