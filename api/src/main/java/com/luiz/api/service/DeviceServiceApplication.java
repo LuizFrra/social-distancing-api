@@ -11,6 +11,8 @@ import com.luiz.domain.entities.device.dto.CreateDeviceDTO;
 import com.luiz.domain.entities.device.dto.CreateDeviceEnvDTO;
 import com.luiz.domain.entities.device.dto.CreateDeviceTagDTO;
 import com.luiz.domain.entities.device.dto.DeviceDTO;
+import com.luiz.domain.infrastructure.services.device.DeleteDeviceEnvService;
+import com.luiz.domain.infrastructure.services.device.DeleteDeviceTagService;
 import com.luiz.domain.infrastructure.services.device.GetAllDevicesService;
 import com.luiz.domain.infrastructure.services.device.LoadDeviceService;
 import com.luiz.domain.infrastructure.services.device.SaveDeviceService;
@@ -35,16 +37,22 @@ public class DeviceServiceApplication {
 
     private final UpdateDeviceService updateDeviceService;
 
+    private final DeleteDeviceEnvService deleteDeviceEnvService;
+
+    private final DeleteDeviceTagService deleteDeviceTagService;
+
     public DeviceServiceApplication(
             DeviceService deviceService,
             SaveDeviceService saveDeviceService,
             GetAllDevicesService getAllDevicesService,
-            LoadDeviceService loadDeviceService, UpdateDeviceService updateDeviceService) {
+            LoadDeviceService loadDeviceService, UpdateDeviceService updateDeviceService, DeleteDeviceEnvService deleteDeviceEnvService, DeleteDeviceTagService deleteDeviceTagService) {
         this.deviceService = deviceService;
         this.saveDeviceService = saveDeviceService;
         this.getAllDevicesService = getAllDevicesService;
         this.loadDeviceService = loadDeviceService;
         this.updateDeviceService = updateDeviceService;
+        this.deleteDeviceEnvService = deleteDeviceEnvService;
+        this.deleteDeviceTagService = deleteDeviceTagService;
     }
 
     public DeviceDTO createDevice(CreateDeviceDTO createDeviceDTO) {
@@ -77,4 +85,11 @@ public class DeviceServiceApplication {
         return DeviceMapper.INSTANCE.deviceToDeviceDTO(updatedDevice);
     }
 
+    public void deleteDeviceEnv(Long deviceId, String envName) {
+        deleteDeviceEnvService.call(deviceId, envName);
+    }
+
+    public void deleteDeviceTag(Long deviceId, String tagName) {
+        deleteDeviceTagService.call(deviceId, tagName);
+    }
 }

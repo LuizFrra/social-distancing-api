@@ -7,6 +7,7 @@ import com.luiz.domain.entities.device.dto.CreateDeviceTagDTO;
 import com.luiz.domain.entities.device.dto.DeviceDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -51,5 +52,23 @@ public class DeviceController {
             @PathVariable Long deviceId
     ) {
         return ResponseEntity.ok(deviceServiceApplication.addTag(deviceId, createDeviceTagDTO));
+    }
+
+    @DeleteMapping("/{deviceId}/env/{envName}")
+    public ResponseEntity<DeviceDTO> deleteDeviceEnvironment(
+            @PathVariable String envName,
+            @PathVariable Long deviceId
+    ) {
+        deviceServiceApplication.deleteDeviceEnv(deviceId, envName);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{deviceId}/tag/{tagName}")
+    public ResponseEntity<DeviceDTO> deleteDeviceTag(
+            @PathVariable String tagName,
+            @PathVariable Long deviceId
+    ) {
+        deviceServiceApplication.deleteDeviceTag(deviceId, tagName);
+        return ResponseEntity.ok().build();
     }
 }
