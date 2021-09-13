@@ -1,6 +1,6 @@
 package com.luiz.infra.services.device;
 
-import com.luiz.domain.entities.device.Device;
+import com.luiz.domain.entities.device.model.Device;
 import com.luiz.domain.infrastructure.services.device.GetAllDevicesService;
 import com.luiz.infra.repositories.DeviceRepository;
 import org.springframework.stereotype.Service;

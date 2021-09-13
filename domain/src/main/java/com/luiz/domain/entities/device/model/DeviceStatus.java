@@ -1,4 +1,4 @@
-package com.luiz.domain.entities.device;
+package com.luiz.domain.entities.device.model;
 
 public enum DeviceStatus {
     BLOCKED("BLOCKED"), OFFLINE("OFFLINE"), ONLINE("ONLINE");

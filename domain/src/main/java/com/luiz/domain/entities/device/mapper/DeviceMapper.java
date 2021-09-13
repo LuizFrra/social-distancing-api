@@ -1,7 +1,8 @@
-package com.luiz.domain.entities.device;
+package com.luiz.domain.entities.device.mapper;
 
 import com.luiz.domain.entities.device.dto.CreateDeviceDTO;
 import com.luiz.domain.entities.device.dto.DeviceDTO;
+import com.luiz.domain.entities.device.model.Device;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

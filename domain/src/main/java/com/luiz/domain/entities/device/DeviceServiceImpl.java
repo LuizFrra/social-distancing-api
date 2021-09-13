@@ -1,5 +1,9 @@
 package com.luiz.domain.entities.device;
 
+import com.luiz.domain.entities.device.model.Device;
+import com.luiz.domain.entities.device.model.DeviceEnv;
+import com.luiz.domain.entities.device.model.DeviceStatus;
+import com.luiz.domain.entities.device.model.DeviceTag;
 import com.luiz.domain.exceptions.DataAlreadyExistException;
 import com.luiz.domain.exceptions.FieldRequiredException;
 import org.springframework.stereotype.Service;

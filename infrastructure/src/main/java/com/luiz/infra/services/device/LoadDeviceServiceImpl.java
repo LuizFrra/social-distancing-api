@@ -1,6 +1,6 @@
 package com.luiz.infra.services.device;
 
-import com.luiz.domain.entities.device.Device;
+import com.luiz.domain.entities.device.model.Device;
 import com.luiz.domain.exceptions.DataNotFoundException;
 import com.luiz.domain.exceptions.FieldRequiredException;
 import com.luiz.domain.infrastructure.services.device.LoadDeviceService;

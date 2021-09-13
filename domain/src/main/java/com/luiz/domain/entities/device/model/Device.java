@@ -1,4 +1,4 @@
-package com.luiz.domain.entities.device;
+package com.luiz.domain.entities.device.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;

@@ -1,6 +1,6 @@
 package com.luiz.domain.entities.device.dto;
 
-import com.luiz.domain.entities.device.DeviceStatus;
+import com.luiz.domain.entities.device.model.DeviceStatus;
 
 import java.util.List;
 

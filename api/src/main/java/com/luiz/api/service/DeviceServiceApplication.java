@@ -1,12 +1,12 @@
 package com.luiz.api.service;
 
-import com.luiz.domain.entities.device.Device;
-import com.luiz.domain.entities.device.DeviceEnv;
-import com.luiz.domain.entities.device.DeviceEnvMapper;
-import com.luiz.domain.entities.device.DeviceMapper;
+import com.luiz.domain.entities.device.model.Device;
+import com.luiz.domain.entities.device.model.DeviceEnv;
+import com.luiz.domain.entities.device.mapper.DeviceEnvMapper;
+import com.luiz.domain.entities.device.mapper.DeviceMapper;
 import com.luiz.domain.entities.device.DeviceService;
-import com.luiz.domain.entities.device.DeviceTag;
-import com.luiz.domain.entities.device.DeviceTagMapper;
+import com.luiz.domain.entities.device.model.DeviceTag;
+import com.luiz.domain.entities.device.mapper.DeviceTagMapper;
 import com.luiz.domain.entities.device.dto.CreateDeviceDTO;
 import com.luiz.domain.entities.device.dto.CreateDeviceEnvDTO;
 import com.luiz.domain.entities.device.dto.CreateDeviceTagDTO;

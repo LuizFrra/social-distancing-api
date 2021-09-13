@@ -1,7 +1,7 @@
 package com.luiz.api.controller.device;
 
 import com.luiz.api.common.BaseControllerTest;
-import com.luiz.domain.entities.device.DeviceStatus;
+import com.luiz.domain.entities.device.model.DeviceStatus;
 import com.luiz.domain.entities.device.dto.CreateDeviceDTO;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;

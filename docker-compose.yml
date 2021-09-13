@@ -5,23 +5,56 @@ networks:
     driver: bridge
 
 volumes:
+  elasticsearch_data:
+    driver: local
   social_distancing_db:
     driver: local
 
 services:
-  api:
-    build:
-      context: ./
+  # search engine
+  elasticsearch:
+    image: elasticsearch:7.9.3
+    container_name: elasticsearch
     environment:
-      SPRING_PROFILES_ACTIVE: dev
-      DATASOURCE_PORT: 5432
-      DATASOURCE_HOST: social_distancing_db
+      - discovery.type=single-node
+      - http.port=9200
+      - http.cors.enabled=true
+      - http.cors.allow-origin=http://localhost:1358,http://127.0.0.1:1358
+      - http.cors.allow-headers=X-Requested-With,X-Auth-Token,Content-Type,Content-Length,Authorization
+      - http.cors.allow-credentials=true
+      - bootstrap.memory_lock=true
+      - 'ES_JAVA_OPTS=-Xms512m -Xmx512m'
     ports:
-      - 80:8080
-    networks:
-      - social_distancing
-    depends_on:
-      - social_distancing_db
+      - '9200:9200'
+      - '9300:9300'
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+  # elasticsearch browser
+  dejavu:
+    image: appbaseio/dejavu:3.4.7
+    container_name: dejavu
+    ports:
+      - '1358:1358'
+    links:
+      - elasticsearch
+
+#  api:
+#    build:
+#      context: ./
+#    environment:
+#      SPRING_PROFILES_ACTIVE: dev
+#      DATASOURCE_PORT: 5432
+#      DATASOURCE_HOST: social_distancing_db
+#    ports:
+#      - 80:8080
+#    networks:
+#      - social_distancing
+#    depends_on:
+#      - social_distancing_db
 
   social_distancing_db:
     image: postgres:13-alpine

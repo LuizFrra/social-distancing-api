@@ -1,6 +1,6 @@
 package com.luiz.domain.unit.service.DeviceService;
 
-import com.luiz.domain.entities.device.Device;
+import com.luiz.domain.entities.device.model.Device;
 import com.luiz.domain.entities.device.DeviceService;
 import com.luiz.domain.entities.device.DeviceServiceImpl;
 import org.junit.jupiter.api.Assertions;

@@ -1,9 +1,9 @@
 package com.luiz.infra.integration.service;
 
-import com.luiz.domain.entities.device.Device;
+import com.luiz.domain.entities.device.model.Device;
 import com.luiz.domain.entities.device.DeviceService;
 import com.luiz.domain.entities.device.DeviceServiceImpl;
-import com.luiz.domain.entities.device.DeviceStatus;
+import com.luiz.domain.entities.device.model.DeviceStatus;
 import com.luiz.domain.exceptions.DataAlreadyExistException;
 import com.luiz.domain.exceptions.FieldRequiredException;
 import com.luiz.domain.infrastructure.services.device.SaveDeviceService;

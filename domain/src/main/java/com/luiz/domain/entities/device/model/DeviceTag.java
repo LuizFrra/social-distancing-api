@@ -1,4 +1,4 @@
-package com.luiz.domain.entities.device;
+package com.luiz.domain.entities.device.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,39 +10,26 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "device_environment_variable")
-public class DeviceEnv {
+@Table(name = "device_tag")
+public class DeviceTag {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /**
-     * The variable name identifier
-     */
-    @Column(name = "name", length = 64)
+    @Column(length = 64)
     private String name;
 
-    /**
-     * The variable value
-     */
-    @Column(name = "value", length = 256)
-    private String value;
-
-    /**
-     * The device who owner the variable
-     */
     @ManyToOne
     @JoinColumn(name = "device_id")
     private Device device;
 
-    public DeviceEnv() {
+    public DeviceTag() {
     }
 
-    public DeviceEnv(Long id, String name, String value, Device device) {
+    public DeviceTag(Long id, String name, Device device) {
         this.id = id;
         this.name = name;
-        this.value = value;
         this.device = device;
     }
 
@@ -60,14 +47,6 @@ public class DeviceEnv {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
     }
 
     public Device getDevice() {

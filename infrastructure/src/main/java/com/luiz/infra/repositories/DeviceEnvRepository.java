@@ -1,6 +1,6 @@
 package com.luiz.infra.repositories;
 
-import com.luiz.domain.entities.device.DeviceEnv;
+import com.luiz.domain.entities.device.model.DeviceEnv;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

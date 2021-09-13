@@ -1,6 +1,6 @@
 package com.luiz.infra.repositories;
 
-import com.luiz.domain.entities.device.Device;
+import com.luiz.domain.entities.device.model.Device;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
