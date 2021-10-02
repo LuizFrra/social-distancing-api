@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -47,6 +48,9 @@ public class Device {
     @OneToMany(mappedBy = "device", cascade = CascadeType.ALL)
     private Collection<DeviceTag> tags = new ArrayList<>();
 
+    @Transient
+    private Collection<DeviceLog> logs = new ArrayList<>();
+
     public Device() {
     }
 
@@ -56,14 +60,15 @@ public class Device {
             DeviceStatus status,
             String key,
             List<DeviceEnv> environmentVariables,
-            List<DeviceTag> tags
-    ) {
+            List<DeviceTag> tags,
+            Collection<DeviceLog> logs) {
         this.id = id;
         this.identifier = identifier;
         this.status = status;
         this.key = key;
         this.environmentVariables = environmentVariables;
         this.tags = tags;
+        this.logs = logs;
     }
 
     public Device(Long id, String identifier, DeviceStatus status, String key) {
@@ -119,5 +124,13 @@ public class Device {
 
     public void setTags(Collection<DeviceTag> tags) {
         this.tags = tags;
+    }
+
+    public Collection<DeviceLog> getLogs() {
+        return logs;
+    }
+
+    public void setLogs(Collection<DeviceLog> logs) {
+        this.logs = logs;
     }
 }

@@ -2,10 +2,12 @@ package com.luiz.domain.entities.device;
 
 import com.luiz.domain.entities.device.model.Device;
 import com.luiz.domain.entities.device.model.DeviceEnv;
+import com.luiz.domain.entities.device.model.DeviceLog;
 import com.luiz.domain.entities.device.model.DeviceStatus;
 import com.luiz.domain.entities.device.model.DeviceTag;
 import com.luiz.domain.exceptions.DataAlreadyExistException;
 import com.luiz.domain.exceptions.FieldRequiredException;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -73,6 +75,28 @@ public class DeviceServiceImpl implements DeviceService {
 
         deviceTag.setDevice(device);
         device.getTags().add(deviceTag);
+
+        return true;
+    }
+
+    @Override
+    public boolean addLog(Device device, DeviceLog log) {
+        log.setDeviceId(device.getId());
+
+        if(device.getId() <= 0)
+            throw new FieldRequiredException("device.log.id.notnull.validation");
+
+        if(log.getPayload() == null)
+            throw new FieldRequiredException("device.log.payload.required");
+
+        log.getPayload().forEach((key, value) -> {
+            if(StringUtils.isBlank(key))
+                throw new FieldRequiredException("device.log.payload.key.required");
+            else if(StringUtils.isBlank(value))
+                throw new FieldRequiredException("device.log.payload.value.required");
+        });
+
+        device.getLogs().add(log);
 
         return true;
     }

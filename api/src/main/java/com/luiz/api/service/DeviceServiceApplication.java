@@ -1,10 +1,14 @@
 package com.luiz.api.service;
 
+import com.luiz.domain.entities.device.dto.CreateDeviceLogDTO;
+import com.luiz.domain.entities.device.dto.DeviceLogDTO;
+import com.luiz.domain.entities.device.mapper.DeviceLogMapper;
 import com.luiz.domain.entities.device.model.Device;
 import com.luiz.domain.entities.device.model.DeviceEnv;
 import com.luiz.domain.entities.device.mapper.DeviceEnvMapper;
 import com.luiz.domain.entities.device.mapper.DeviceMapper;
 import com.luiz.domain.entities.device.DeviceService;
+import com.luiz.domain.entities.device.model.DeviceLog;
 import com.luiz.domain.entities.device.model.DeviceTag;
 import com.luiz.domain.entities.device.mapper.DeviceTagMapper;
 import com.luiz.domain.entities.device.dto.CreateDeviceDTO;
@@ -14,11 +18,13 @@ import com.luiz.domain.entities.device.dto.DeviceDTO;
 import com.luiz.domain.infrastructure.services.device.DeleteDeviceEnvService;
 import com.luiz.domain.infrastructure.services.device.DeleteDeviceTagService;
 import com.luiz.domain.infrastructure.services.device.GetAllDevicesService;
+import com.luiz.domain.infrastructure.services.device.InsertDeviceLogService;
 import com.luiz.domain.infrastructure.services.device.LoadDeviceService;
 import com.luiz.domain.infrastructure.services.device.SaveDeviceService;
 import com.luiz.domain.infrastructure.services.device.UpdateDeviceService;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -41,11 +47,18 @@ public class DeviceServiceApplication {
 
     private final DeleteDeviceTagService deleteDeviceTagService;
 
+    private final InsertDeviceLogService insertDeviceLogService;
+
     public DeviceServiceApplication(
             DeviceService deviceService,
             SaveDeviceService saveDeviceService,
             GetAllDevicesService getAllDevicesService,
-            LoadDeviceService loadDeviceService, UpdateDeviceService updateDeviceService, DeleteDeviceEnvService deleteDeviceEnvService, DeleteDeviceTagService deleteDeviceTagService) {
+            LoadDeviceService loadDeviceService,
+            UpdateDeviceService updateDeviceService,
+            DeleteDeviceEnvService deleteDeviceEnvService,
+            DeleteDeviceTagService deleteDeviceTagService,
+            InsertDeviceLogService insertDeviceLogService
+    ) {
         this.deviceService = deviceService;
         this.saveDeviceService = saveDeviceService;
         this.getAllDevicesService = getAllDevicesService;
@@ -53,6 +66,7 @@ public class DeviceServiceApplication {
         this.updateDeviceService = updateDeviceService;
         this.deleteDeviceEnvService = deleteDeviceEnvService;
         this.deleteDeviceTagService = deleteDeviceTagService;
+        this.insertDeviceLogService = insertDeviceLogService;
     }
 
     public DeviceDTO createDevice(CreateDeviceDTO createDeviceDTO) {
@@ -91,5 +105,13 @@ public class DeviceServiceApplication {
 
     public void deleteDeviceTag(Long deviceId, String tagName) {
         deleteDeviceTagService.call(deviceId, tagName);
+    }
+
+    public Collection<DeviceLogDTO> addLog(Long deviceId, CreateDeviceLogDTO createDeviceLogDTO) {
+        Device device = loadDeviceService.call(deviceId);
+        DeviceLog deviceLog = DeviceLogMapper.INSTANCE.fromCreateDeviceLogDTOToDeviceLog(createDeviceLogDTO);
+        deviceService.addLog(device, deviceLog);
+        device = insertDeviceLogService.call(device);
+        return DeviceLogMapper.INSTANCE.fromDeviceLogToDeviceLogDTO(device.getLogs());
     }
 }

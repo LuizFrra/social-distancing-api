@@ -1,25 +1,18 @@
-package com.luiz.domain.entities.device.model;
+package com.luiz.domain.entities.device.dto;
 
-import org.springframework.data.elasticsearch.annotations.Document;
-
-import javax.persistence.Id;
 import java.util.Map;
 
-@Document(indexName = "devices_log")
-public class DeviceLog {
-
-    @Id
+public class DeviceLogDTO {
     private String id;
 
     private Long deviceId;
 
     private Map<String, String> payload;
 
-    public DeviceLog() {
-
+    public DeviceLogDTO() {
     }
 
-    public DeviceLog(String id, Long deviceId, Map<String, String> payload) {
+    public DeviceLogDTO(String id, Long deviceId, Map<String, String> payload) {
         this.id = id;
         this.deviceId = deviceId;
         this.payload = payload;
