@@ -27,12 +27,15 @@ services:
     ports:
       - '9200:9200'
       - '9300:9300'
+    networks:
+      - social_distancing
     ulimits:
       memlock:
         soft: -1
         hard: -1
     volumes:
       - elasticsearch_data:/usr/share/elasticsearch/data
+
   # elasticsearch browser
   dejavu:
     image: appbaseio/dejavu:3.4.7
@@ -42,19 +45,20 @@ services:
     links:
       - elasticsearch
 
-#  api:
-#    build:
-#      context: ./
-#    environment:
-#      SPRING_PROFILES_ACTIVE: dev
-#      DATASOURCE_PORT: 5432
-#      DATASOURCE_HOST: social_distancing_db
-#    ports:
-#      - 80:8080
-#    networks:
-#      - social_distancing
-#    depends_on:
-#      - social_distancing_db
+  api:
+    build:
+      context: ./
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      DATASOURCE_PORT: 5432
+      DATASOURCE_HOST: social_distancing_db
+    ports:
+      - 80:8080
+    networks:
+      - social_distancing
+    depends_on:
+      - social_distancing_db
+      - elasticsearch
 
   social_distancing_db:
     image: postgres:13-alpine
