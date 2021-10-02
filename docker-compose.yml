@@ -12,14 +12,14 @@ volumes:
 
 services:
   # search engine
-  elasticsearch:
+  social_distancing_elastic:
     image: elasticsearch:7.9.3
     container_name: elasticsearch
     environment:
       - discovery.type=single-node
       - http.port=9200
       - http.cors.enabled=true
-      - http.cors.allow-origin=http://localhost:1358,http://127.0.0.1:1358
+      - http.cors.allow-origin=http://localhost:1358,http://127.0.0.1:1358,http://168.119.178.10:1358
       - http.cors.allow-headers=X-Requested-With,X-Auth-Token,Content-Type,Content-Length,Authorization
       - http.cors.allow-credentials=true
       - bootstrap.memory_lock=true
@@ -42,8 +42,10 @@ services:
     container_name: dejavu
     ports:
       - '1358:1358'
+    networks:
+      - social_distancing
     links:
-      - elasticsearch
+      - social_distancing_elastic
 
   api:
     build:
@@ -52,17 +54,17 @@ services:
       SPRING_PROFILES_ACTIVE: dev
       DATASOURCE_PORT: 5432
       DATASOURCE_HOST: social_distancing_db
+      ELASTIC_SEARCH_URL: social_distancing_elastic
     ports:
       - 80:8080
     networks:
       - social_distancing
     depends_on:
       - social_distancing_db
-      - elasticsearch
+      - social_distancing_elastic
 
   social_distancing_db:
     image: postgres:13-alpine
-    container_name: social_distancing_db_1
     restart: always
     volumes:
       - social_distancing_db:/var/lib/postgresql/data
