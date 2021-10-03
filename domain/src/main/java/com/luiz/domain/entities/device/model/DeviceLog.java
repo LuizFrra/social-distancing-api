@@ -3,6 +3,7 @@ package com.luiz.domain.entities.device.model;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.Id;
+import java.time.Instant;
 import java.util.Map;
 
 @Document(indexName = "devices_log")
@@ -10,6 +11,8 @@ public class DeviceLog {
 
     @Id
     private String id;
+
+    private Long timestamp = Instant.now().toEpochMilli();
 
     private Long deviceId;
 
@@ -47,5 +50,13 @@ public class DeviceLog {
 
     public void setPayload(Map<String, String> payload) {
         this.payload = payload;
+    }
+
+    public Long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
     }
 }
