@@ -20,6 +20,7 @@ import com.luiz.domain.infrastructure.services.device.DeleteDeviceEnvService;
 import com.luiz.domain.infrastructure.services.device.DeleteDeviceTagService;
 import com.luiz.domain.infrastructure.services.device.ExistDeviceService;
 import com.luiz.domain.infrastructure.services.device.GetAllDevicesService;
+import com.luiz.domain.infrastructure.services.device.GetDeviceLogService;
 import com.luiz.domain.infrastructure.services.device.InsertDeviceLogService;
 import com.luiz.domain.infrastructure.services.device.LoadDeviceService;
 import com.luiz.domain.infrastructure.services.device.SaveDeviceService;
@@ -53,6 +54,8 @@ public class DeviceServiceApplication {
 
     private final ExistDeviceService existDeviceService;
 
+    private final GetDeviceLogService getDeviceLogService;
+
     public DeviceServiceApplication(
             DeviceService deviceService,
             SaveDeviceService saveDeviceService,
@@ -62,7 +65,7 @@ public class DeviceServiceApplication {
             DeleteDeviceEnvService deleteDeviceEnvService,
             DeleteDeviceTagService deleteDeviceTagService,
             InsertDeviceLogService insertDeviceLogService,
-            ExistDeviceService existDeviceService) {
+            ExistDeviceService existDeviceService, GetDeviceLogService getDeviceLogService) {
         this.deviceService = deviceService;
         this.saveDeviceService = saveDeviceService;
         this.getAllDevicesService = getAllDevicesService;
@@ -72,6 +75,7 @@ public class DeviceServiceApplication {
         this.deleteDeviceTagService = deleteDeviceTagService;
         this.insertDeviceLogService = insertDeviceLogService;
         this.existDeviceService = existDeviceService;
+        this.getDeviceLogService = getDeviceLogService;
     }
 
     public DeviceDTO createDevice(CreateDeviceDTO createDeviceDTO) {
@@ -120,5 +124,11 @@ public class DeviceServiceApplication {
         deviceService.addLog(device, deviceLog);
         device = insertDeviceLogService.call(device);
         return DeviceLogMapper.INSTANCE.fromDeviceLogToDeviceLogDTO(device.getLogs());
+    }
+
+    public Collection<DeviceLog> getAllDeviceLog(Long deviceId) {
+        boolean deviceExist = existDeviceService.call(deviceId);
+        if(!deviceExist) throw new DataNotFoundException("device does not exist");
+        return getDeviceLogService.call(deviceId);
     }
 }
