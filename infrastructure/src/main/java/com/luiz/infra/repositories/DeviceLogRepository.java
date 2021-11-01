@@ -7,5 +7,5 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
 import java.util.Collection;
 
 public interface DeviceLogRepository extends ElasticsearchRepository<DeviceLog, String> {
-    Collection<DeviceLog> findByDeviceId(Long deviceId);
+    Collection<DeviceLog> findTop10ByDeviceIdOrderByTimestampDesc(Long deviceId);
 }

@@ -18,6 +18,6 @@ public class GetDeviceLogServiceImpl implements GetDeviceLogService {
 
     @Override
     public Collection<DeviceLog> call(Long deviceId) {
-        return deviceLogRepository.findByDeviceId(deviceId);
+        return deviceLogRepository.findTop10ByDeviceIdOrderByTimestampDesc(deviceId);
     }
 }
