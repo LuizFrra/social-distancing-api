@@ -16,7 +16,7 @@ import java.util.Collection;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/v1/device/{deviceId}/log")
+@RequestMapping("/device/{deviceId}/log")
 public class DeviceLogController {
 
     private final DeviceServiceApplication deviceServiceApplication;

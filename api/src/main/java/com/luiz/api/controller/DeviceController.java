@@ -19,7 +19,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/device")
+@RequestMapping("/device")
 public class DeviceController {
 
     private final DeviceServiceApplication deviceServiceApplication;

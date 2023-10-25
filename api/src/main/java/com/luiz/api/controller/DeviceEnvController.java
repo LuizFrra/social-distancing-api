@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/v1/device/{deviceId}/env")
+@RequestMapping("/device/{deviceId}/env")
 public class DeviceEnvController {
 
     private final DeviceServiceApplication deviceServiceApplication;

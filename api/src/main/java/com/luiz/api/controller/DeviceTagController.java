@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/v1/device/{deviceId}/tag")
+@RequestMapping("/device/{deviceId}/tag")
 public class DeviceTagController {
 
     private final DeviceServiceApplication deviceServiceApplication;
